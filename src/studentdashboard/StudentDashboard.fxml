@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentdashboard.StudentDashboardController">
    <children>
       <SplitPane dividerPositions="0.5" layoutY="-2.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
@@ -19,6 +18,11 @@
                <children>
                   <TextField fx:id="semesterTextField" alignment="CENTER" layoutX="74.0" layoutY="83.0" promptText="Enter Semester" />
                   <Button fx:id="getSubjectsButton" layoutX="107.0" layoutY="199.0" mnemonicParsing="false" text="Get Subjects" />
+                  <Label layoutX="115.0" layoutY="14.0" text="Semester" underline="true">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                  </Label>
                </children>
             </AnchorPane>
           <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
