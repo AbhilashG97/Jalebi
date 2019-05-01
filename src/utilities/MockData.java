@@ -48,7 +48,7 @@ public class MockData {
         }
     }
     
-    public void readMockData() {
+    public ArrayList<Student> readMockData() {
         ObjectInputStream objectInputStream = null;
         try {
             objectInputStream = 
@@ -68,8 +68,7 @@ public class MockData {
             Logger.getLogger(MockData.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
-        
-        System.out.println(data);
+        return data;
     }
     
     private ArrayList<Course> getMockCourseList() {

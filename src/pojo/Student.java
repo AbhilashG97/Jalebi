@@ -42,11 +42,14 @@ public class Student implements Serializable {
         this.password = password;
     }
 
+    public String getUsername() {
+        return username;
+    }
+    
     @Override
     public String toString() {
         return "Student{" + "username=" + username + ", password=" + password + 
                 ", courseMap=" + courseMap + '}';
     }
-    
-    
+ 
 }

@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -24,6 +25,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import pojo.Student;
+import utilities.MockData;
 
 /**
  * FXML Controller class
@@ -37,7 +40,7 @@ public class LoginWindowController implements Initializable {
     @FXML private Button loginButton;
     
     /**
-     * Initializes the controller class.
+     * Initializes the controller class
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -46,8 +49,12 @@ public class LoginWindowController implements Initializable {
     
     public void onLoginButtonClicked() {
         loginButton.setOnAction((event) -> {
-            openStudentDashBoard(event);
-        });
+            if(isUserAuthenticated()) {
+                openStudentDashBoard(event); 
+            } else {
+                System.err.println("Ah oh, did you enter everything correctly?");
+            }      
+        });            
     }
     
     /**
@@ -55,11 +62,12 @@ public class LoginWindowController implements Initializable {
      * @return true if the user is authenticated else return false
      */
     private boolean isUserAuthenticated() {
-        /**
-         * TODO: If user is authenticated return true else false
-         */
+        ArrayList<Student> data = new MockData().readMockData();
         
-        return false;
+        return data.stream().anyMatch((student) -> (student.getPassword()
+                .equals(passwordField.getText().trim()) 
+                && student.getUsername()
+                        .equals(usernameTextField.getText().trim())));
     }
     
     /**
