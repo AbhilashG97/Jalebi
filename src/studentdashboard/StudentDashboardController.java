@@ -7,7 +7,11 @@ package studentdashboard;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import javafx.scene.control.TextField;
 
 /**
  * FXML Controller class
@@ -15,13 +19,17 @@ import javafx.fxml.Initializable;
  * @author Abhilash G <abhilashg@am.students.amrita.edu>
  */
 public class StudentDashboardController implements Initializable {
-
+    
+    @FXML private TextField semesterTextField;
+    @FXML private Button getSubjectsButton;
+    @FXML private ListView subjectListView;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        
     }    
     
 }

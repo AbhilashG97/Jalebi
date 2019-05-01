@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import utilities.MockData;
 
 /**
  *
@@ -33,12 +34,19 @@ public class Main extends Application {
         primaryStage.setTitle("Student Management System");
         primaryStage.setScene(scene);
         primaryStage.show();
+        
     }
 
     /**
      * @param args the command line arguments
+     * @throws java.io.IOException
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
+        
+        MockData mockData = new MockData();
+        mockData.insertMockData();
+        mockData.readMockData();
+        
         launch(args);
     }
     

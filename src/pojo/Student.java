@@ -6,6 +6,8 @@
 package pojo;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 /**
  *
@@ -15,12 +17,23 @@ public class Student implements Serializable {
     
     private final String username;
     private String password;
+    private LinkedHashMap<Integer, ArrayList<Course>> courseMap; 
 
-    public Student(String username, String password) {
+    public Student(String username, String password, 
+            LinkedHashMap<Integer, ArrayList<Course>> courseMap) {
         this.username = username;
         this.password = password;
+        this.courseMap = courseMap;
     }
 
+    public LinkedHashMap<Integer, ArrayList<Course>> getCourseMap() {
+        return courseMap;
+    }
+
+    public void setCourseMap(LinkedHashMap<Integer, ArrayList<Course>> courseMap) {
+        this.courseMap = courseMap;
+    }
+    
     public String getPassword() {
         return password;
     }
@@ -31,6 +44,9 @@ public class Student implements Serializable {
 
     @Override
     public String toString() {
-        return "Student{" + "username=" + username + ", password=" + password + '}';
+        return "Student{" + "username=" + username + ", password=" + password + 
+                ", courseMap=" + courseMap + '}';
     }
+    
+    
 }
