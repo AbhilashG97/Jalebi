@@ -16,6 +16,7 @@
 package utilities;
 
 import javafx.scene.control.Alert;
+import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.ButtonType;
 import javafx.scene.layout.Region;
 
@@ -29,6 +30,10 @@ public class CustomAlert {
 
     public CustomAlert(String errorMessage) {
         alert = new Alert(Alert.AlertType.WARNING, errorMessage, ButtonType.OK);
+    }
+    
+        public CustomAlert(AlertType alertType, String errorMessage) {
+        alert = new Alert(alertType, errorMessage, ButtonType.OK);
     }
     
     public void showAlert() {
