@@ -34,6 +34,7 @@ import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 import loginwindow.LoginWindowController;
 import pojo.Course;
+import studentdashboard.StudentDashboardController;
 
 /**
  * FXML Controller class
@@ -48,7 +49,6 @@ public class CourseDetailWindowController implements Initializable {
     @FXML private Label endSemesterLabel;
     @FXML private Label gradeLabel;
     @FXML private Button backButton;
-    @FXML private GridPane gridPane;
     
     private Course course;
     
@@ -67,28 +67,31 @@ public class CourseDetailWindowController implements Initializable {
     
     public void onBackButtonPressed() {
         backButton.setOnAction((event) -> {
+            
             URL url = null;
             try {
                 url = Paths.get("src/studentdashboard/StudentDashboard.fxml")
                         .toUri().toURL();
             } catch (MalformedURLException ex) {
-                Logger.getLogger(LoginWindowController.class.getName())
+                Logger.getLogger(CourseDetailWindowController.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
-            FXMLLoader loader = new FXMLLoader();
-
-            loader.setLocation(url);
+            
+            FXMLLoader loader = new FXMLLoader(url);
 
             Parent parent = null;
             try {
-                parent = loader.load(url);
+                parent = (Parent)loader.load();
             } catch (IOException ex) {
-                Logger.getLogger(LoginWindowController.class.getName())
+                Logger.getLogger(CourseDetailWindowController.class.getName())
                         .log(Level.SEVERE, null, ex);
             }
-
+            
             Scene studentDashboardScene = new Scene(parent);
-
+            StudentDashboardController controller = loader.getController();
+            
+            controller.restoreState();
+            
             Stage stage = (Stage) ((Node) event.getSource())
                     .getScene().getWindow();
             stage.setScene(studentDashboardScene);
@@ -97,10 +100,6 @@ public class CourseDetailWindowController implements Initializable {
     }
     
     private void displayData() {
-        
-        System.out.println(String.valueOf(course.getMarks()
-                .getFirstInternal()));
-        
         firstPeriodicalLabel.setText(String.valueOf(course.getMarks()
                 .getFirstInternal()));
         secondPeriodicalLabel.setText(String.valueOf(course.getMarks()
@@ -110,7 +109,6 @@ public class CourseDetailWindowController implements Initializable {
         endSemesterLabel.setText(String.valueOf(course.getMarks()
                 .getEndSemester()));
         gradeLabel.setText(String.valueOf(course.getMarks()
-                .getGrade()));
-        
+                .getGrade()));        
     }
 }

@@ -1,8 +1,12 @@
 package studentdashboard;
 
 import coursedetails.CourseDetailWindowController;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
@@ -41,9 +45,15 @@ public class StudentDashboardController implements Initializable {
     private Button getSubjectsButton;
     @FXML
     private ListView subjectListView;
+    
     private Student student;
     private int selectedSemester;
 
+    private final String fileSeparator = System.getProperty("file.separator");
+
+    private final String fileDataPath = "src" + fileSeparator + "data"
+                + fileSeparator + "dashboard_restore_data.dat";
+    
     /**
      * Initializes the controller class.
      */
@@ -51,7 +61,7 @@ public class StudentDashboardController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         student = readFromDashboardData();
         onGetSubjectsButtonPressed();
-        onListViewClickedTwice();
+        onListViewItemClickedTwice();
     }
 
     public void onGetSubjectsButtonPressed() {
@@ -62,7 +72,7 @@ public class StudentDashboardController implements Initializable {
     }
 
     public void displayData(int semester) {
-
+        subjectListView.getItems().clear();
         if (student.getCourseMap().containsKey(selectedSemester)) {
             student.getCourseMap().forEach((key, value) -> {
                 if (Integer.parseInt(key.toString()) == selectedSemester) {
@@ -78,12 +88,19 @@ public class StudentDashboardController implements Initializable {
         }
     }
 
-    public void onListViewClickedTwice() {
+    public void onListViewItemClickedTwice() {
         subjectListView.setOnMouseClicked((event) -> {
         if(event.getButton().equals(MouseButton.PRIMARY)){
             if(event.getClickCount() == 2){
                 System.out.println("Double clicked");
-                openCourseDetailWindow(event);                
+                try {
+                    writeEnteredDataToFile();
+                } catch (IOException ex) {
+                    Logger.getLogger(StudentDashboardController.class.getName())
+                            .log(Level.SEVERE, null, ex);
+                }
+                
+                openCourseDetailWindow(event);
             }
         }
         });
@@ -104,8 +121,6 @@ public class StudentDashboardController implements Initializable {
                 selectedCourse = course;
             }
         }
-        
-        System.out.println(selectedCourse);
         
         FXMLLoader loader = new FXMLLoader();
         
@@ -140,8 +155,6 @@ public class StudentDashboardController implements Initializable {
     
     private Student readFromDashboardData() {
 
-        String fileSeparator = System.getProperty("file.separator");
-
         String fileDataPath = "src" + fileSeparator + "data"
                 + fileSeparator + "dashboard_data.ser";
 
@@ -169,7 +182,34 @@ public class StudentDashboardController implements Initializable {
     }
     
     public void restoreState() {
+        try {
+            selectedSemester = readEnteredDataFromFile();
+        } catch (IOException ex) {
+            Logger.getLogger(StudentDashboardController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        semesterTextField.setText(String.valueOf(selectedSemester));
+        displayData(selectedSemester);
+    }
+
+    private void writeEnteredDataToFile() throws IOException {
         
+        File file = new File(fileDataPath);
+        
+        System.out.println("Selected Semester Written to : " + fileDataPath);
+        
+        file.createNewFile();
+        DataOutputStream writer = 
+                new DataOutputStream(new FileOutputStream(file));
+        System.out.println("Value written " + selectedSemester);
+        writer.writeInt(selectedSemester);
     }
     
+    private int readEnteredDataFromFile() throws IOException {
+        
+        DataInputStream reader = 
+                new DataInputStream(new FileInputStream(fileDataPath));
+        int value = reader.readInt();
+        return value;
+    }
 }
