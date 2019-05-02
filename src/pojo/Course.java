@@ -17,13 +17,18 @@ public class Course implements Serializable {
     private int credits;
     private String courseCode;
     private Marks marks;
+    private int attendance;
     
-    public Course(String courseName, int credits, String courseCode,
-                  Marks marks) {
+    public Course(String courseName,
+                  int credits,
+                  String courseCode,
+                  Marks marks,
+                  int attendance) {
         this.courseName = courseName;
         this.credits = credits;
         this.courseCode = courseCode;
         this.marks = marks;
+        this.attendance = attendance;
     }
 
     public String getCourseName() {
@@ -58,8 +63,20 @@ public class Course implements Serializable {
         this.marks = marks;
     }
 
+    public int getAttendance() {
+        return attendance;
+    }
+
+    public void setAttendance(int attendance) {
+        this.attendance = attendance;
+    }
+
     @Override
     public String toString() {
-        return "Course{" + "courseName=" + courseName + ", credits=" + credits + ", courseCode=" + courseCode + ", marks=" + marks + '}';
+        return "Course{" + "courseName=" + courseName + ", credits=" + credits 
+                + ", courseCode=" + courseCode + ", marks=" + marks 
+                + ", attendance=" + attendance + '}';
     }
+
+    
 }

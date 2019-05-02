@@ -46,8 +46,9 @@ public class CourseDetailWindowController implements Initializable {
     @FXML private Label continousEvaluationLabel;
     @FXML private Label endSemesterLabel;
     @FXML private Label gradeLabel;
+    @FXML private Label attendanceLabel;
     @FXML private Button backButton;
-    
+     
     private Course course;
     
     /**
@@ -107,6 +108,7 @@ public class CourseDetailWindowController implements Initializable {
         endSemesterLabel.setText(String.valueOf(course.getMarks()
                 .getEndSemester()));
         gradeLabel.setText(String.valueOf(course.getMarks()
-                .getGrade()));        
+                .getGrade()));
+        attendanceLabel.setText(String.valueOf(course.getAttendance()));        
     }
 }

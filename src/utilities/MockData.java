@@ -75,17 +75,17 @@ public class MockData {
         ArrayList<Course> courseList = new ArrayList<>();
         
         courseList.add(new Course("Natural Language Processing",
-                                  4, "CSE865", new Marks(49, 49, 89, 25)));
+                                  4, "CSE865", new Marks(49, 49, 89, 25), 80));
         courseList.add(new Course("Pattern Recognition",
-                                  4, "CSE853", new Marks(49, 50, 99, 29)));
+                                  4, "CSE853", new Marks(49, 50, 99, 29), 90));
         courseList.add(new Course("Software Engineering",
-                                  4, "CSE313", new Marks(50, 50, 100, 30)));
+                                  4, "CSE313", new Marks(50, 50, 100, 30), 75));
         courseList.add(new Course("Compiler Design",
-                                  4, "CSE311", new Marks(49, 49, 89, 28)));
+                                  4, "CSE311", new Marks(49, 49, 89, 28), 85));
         courseList.add(new Course("Computer Networks",
-                                  4, "CSE312", new Marks(49, 49, 89, 27)));
+                                  4, "CSE312", new Marks(49, 49, 89, 27), 77));
         courseList.add(new Course("Softskills",
-                                  4, "SKL101", new Marks(49, 49, 89, 29)));
+                                  4, "SKL101", new Marks(49, 49, 89, 29), 88));
         return courseList;
     }
     
