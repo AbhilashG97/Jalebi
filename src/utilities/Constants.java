@@ -18,7 +18,8 @@ package utilities;
 import java.io.UnsupportedEncodingException;
 
 /**
- *
+ * A class which contains static fields and methods
+ * 
  * @author Abhilash G <abhilashg@am.students.amrita.edu>
  */
 public class Constants {
