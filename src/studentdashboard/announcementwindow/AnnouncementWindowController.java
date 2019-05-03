@@ -16,8 +16,16 @@
 package studentdashboard.announcementwindow;
 
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
+import javafx.scene.control.ListView;
+import pojo.Faculty;
+import pojo.Student;
+import utilities.MockData;
+import utilities.StudentReaderWriter;
 
 /**
  * FXML Controller class
@@ -26,12 +34,50 @@ import javafx.fxml.Initializable;
  */
 public class AnnouncementWindowController implements Initializable {
 
+    @FXML 
+    private ListView announcementListView;
+    
+    @FXML
+    private Button refreshButton;
+    
+    private Faculty faculty;
+    private Student student;
+    
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        initializeStudent();
+        getFaculty();
+        showAnnouncements();
     }    
+    
+    public void initializeStudent() {
+        student = StudentReaderWriter.readStudentFromFile();
+    }
+    
+    private Faculty getFaculty() {
+      ArrayList<Faculty> facultyList = new MockData().readFacultyMockData();
+        for(Faculty faculty : facultyList) {
+            if(faculty.getDepartment().equals(student.getDepartment())) {
+                this.faculty = faculty;
+                break;
+            }
+        }
+        return faculty;
+    }
+    
+    public void showAnnouncements() {
+        announcementListView.getItems().addAll(faculty.getAnnoucements());
+    }
+    
+    public void onRefreshButtonClicked() {
+        refreshButton.setOnAction((event) -> {
+            announcementListView.getItems().clear();
+            getFaculty();
+            showAnnouncements();
+        });
+    }
     
 }

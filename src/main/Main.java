@@ -45,7 +45,7 @@ public class Main extends Application {
         
         MockData mockData = new MockData();
         mockData.insertStudentMockData();
-        //mockData.readStudentMockData();
+        mockData.insertFacultyMockData();
         launch(args);
     }
     

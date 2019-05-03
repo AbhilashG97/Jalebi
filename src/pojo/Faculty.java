@@ -98,6 +98,6 @@ public class Faculty implements Serializable {
         return "Faculty{" + "department=" + department + ", username=" 
                 + username + ", password=" + password + ", employeePosition=" 
                 + employeePosition + ", studentList=" + studentList 
-                + ", annoucement=" + annoucement + '}';
+                + ", annoucement=" + annoucements + '}';
     }
 }
