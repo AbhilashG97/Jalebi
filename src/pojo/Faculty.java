@@ -29,17 +29,20 @@ public class Faculty implements Serializable {
     private String password;
     private String employeePosition;
     private ArrayList<Student> studentList;
+    private ArrayList<String> annoucements;
     
     public Faculty(String department,
                    String username,
                    String password,
                    String employeePosition,
-                   ArrayList<Student> studentList) {
+                   ArrayList<Student> studentList,
+                   ArrayList<String> annoucements) {
         this.department = department;
         this.username = username;
         this.password = password;
         this.employeePosition = employeePosition;
         this.studentList = studentList;
+        this.annoucements = annoucements;
     }
 
     public String getDepartment() {
@@ -82,10 +85,19 @@ public class Faculty implements Serializable {
         this.studentList = studentList;
     }
 
+    public ArrayList<String> getAnnoucements() {
+        return annoucements;
+    }
+
+    public void setAnnoucements(ArrayList<String> annoucements) {
+        this.annoucements = annoucements;
+    }
+
     @Override
     public String toString() {
         return "Faculty{" + "department=" + department + ", username=" 
                 + username + ", password=" + password + ", employeePosition=" 
-                + employeePosition + ", studentList=" + studentList + '}';
-    }    
+                + employeePosition + ", studentList=" + studentList 
+                + ", annoucement=" + annoucement + '}';
+    }
 }

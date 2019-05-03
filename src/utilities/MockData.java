@@ -27,13 +27,14 @@ import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pojo.Course;
+import pojo.Faculty;
 import pojo.Fine;
 import pojo.Marks;
 import pojo.Student;
 
 /**
  * This class generates mock data and also provides methods which can be used 
- * to read/ write the mock data to a file.
+ * to read/ write the mock data to a file. 
  *
  * @author Abhilash G <abhilashg@am.students.amrita.edu>
  */
@@ -43,8 +44,8 @@ public class MockData {
 
     private final String fileDataPath = "src" + fileSeparator + "data"
             + fileSeparator + "database.ser";
-
-    public void insertMockData() {
+    
+    public ArrayList<Student> getStudentList() {
         ArrayList<Student> studentList = new ArrayList<>();
         studentList.add(new Student("raghu", "maut", Constants.DEPARTMENT_CSE,
                 getCourseMap(), getMockFineMap()));
@@ -57,17 +58,21 @@ public class MockData {
         studentList.add(new Student("james", "bond", Constants.DEPARTMENT_EEE,
                 getCourseMap(), getMockFineMap()));
         studentList.add(new Student("elia", "martel", Constants.DEPARTMENT_EEE,
-                getCourseMap(), getMockFineMap()));
-
+                getCourseMap(), getMockFineMap())); 
+        
+        return studentList;
+    }
+    
+    public void insertStudentMockData() {   
         try {
-            writeStduentListToFile(studentList);
+            writeStudentListToFile(getStudentList());
         } catch (IOException ex) {
             Logger.getLogger(MockData.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
     }
 
-    public ArrayList<Student> readMockData() {
+    public ArrayList<Student> readStudentMockData() {
         ObjectInputStream objectInputStream = null;
         try {
             objectInputStream
@@ -90,6 +95,77 @@ public class MockData {
         return data;
     }
 
+    public ArrayList<Faculty> getFacultyList() {
+        ArrayList<Faculty> facultyList = new ArrayList<>();
+        
+        facultyList.add(new Faculty(Constants.DEPARTMENT_CSE, "Fraghu", "death",
+        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                getAnnouncementList()));
+        
+        facultyList.add(new Faculty(Constants.DEPARTMENT_CSE, "Fjames", "jam",
+        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                getAnnouncementList()));
+        
+        facultyList.add(new Faculty(Constants.DEPARTMENT_ECE, "Fyum", "yum",
+        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                getAnnouncementList()));
+        
+        facultyList.add(new Faculty(Constants.DEPARTMENT_ECE, "Fhawk", "hawk",
+        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                getAnnouncementList()));
+        
+        return facultyList;
+    }
+    
+    public void insertFacultyMockData() throws IOException {
+        
+    String fileSeparator = System.getProperty("file.separator");
+
+    String fileDataPath = "src" + fileSeparator + "data"
+            + fileSeparator + "faculty_database.ser";
+    
+        File file = new File(fileDataPath);
+        System.out.println("Data Written to : " + fileDataPath);
+        file.createNewFile();
+        ObjectOutputStream objectWriter
+                = new ObjectOutputStream(new FileOutputStream(file));
+
+        objectWriter.writeObject(getFacultyList());
+    }
+    
+    public ArrayList<Faculty> readFacultyMockData() {
+        
+    String fileSeparator = System.getProperty("file.separator");
+
+    String fileDataPath = "src" + fileSeparator + "data"
+            + fileSeparator + "faculty_database.ser";        
+        
+        ObjectInputStream objectInputStream = null;
+        try {
+            objectInputStream
+                    = new ObjectInputStream(new FileInputStream(fileDataPath));
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(MockData.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(MockData.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+
+        ArrayList<Faculty> data = null;
+        try {
+            data = (ArrayList<Faculty>) objectInputStream.readObject();
+        } catch (IOException | ClassNotFoundException ex) {
+            Logger.getLogger(MockData.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        return data;
+    }    
+    
     private ArrayList<Course> getMockCourseList() {
         ArrayList<Course> courseList = new ArrayList<>();
 
@@ -144,16 +220,23 @@ public class MockData {
         fine.setECEDepartmentFine(3000);
         return fine;
     }
-
-    public void writeStduentListToFile(ArrayList<Student> studentList)
+    
+    private ArrayList<String> getAnnouncementList() {
+        ArrayList<String> announcementList = new ArrayList<>();
+        announcementList.add("Complete your software engineering assignments");
+        announcementList.add("Prepare for lab exam on 23rd May");
+        announcementList.add("Bring you lab records tomorrow");
+        announcementList.add("Lab exam on UDP tomorrow. Best of luck!!");
+        announcementList.add("There is compiler lab record assignment submission tomorrow");
+        return announcementList;
+    }
+    
+    private void writeStudentListToFile(ArrayList<Student> studentList)
             throws IOException {
 
         File file = new File(fileDataPath);
-
         System.out.println("Data Written to : " + fileDataPath);
-
         file.createNewFile();
-
         ObjectOutputStream objectWriter
                 = new ObjectOutputStream(new FileOutputStream(file));
 

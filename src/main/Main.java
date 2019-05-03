@@ -44,8 +44,8 @@ public class Main extends Application {
     public static void main(String[] args) throws IOException {
         
         MockData mockData = new MockData();
-        mockData.insertMockData();
-        //mockData.readMockData();
+        mockData.insertStudentMockData();
+        //mockData.readStudentMockData();
         launch(args);
     }
     

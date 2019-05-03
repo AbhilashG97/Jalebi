@@ -88,7 +88,7 @@ public class LoginWindowController implements Initializable {
      */
     private boolean isUserAuthenticated() {
         
-        ArrayList<Student> data = new MockData().readMockData();
+        ArrayList<Student> data = new MockData().readStudentMockData();
         
         for(Student student : data) {
             if(student.getPassword()
