@@ -15,10 +15,7 @@
  */
 package loginwindow;
 
-import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -40,6 +37,7 @@ import javafx.stage.Stage;
 import pojo.Student;
 import utilities.CustomAlert;
 import utilities.MockData;
+import utilities.StudentReaderWriter;
 
 /**
  * FXML Controller class
@@ -60,12 +58,16 @@ public class LoginWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         onLoginButtonClicked();
     }
-
+    
+    /**
+     * This method listens for click events and changes the scene if the 
+     * Student is authenticated. 
+     */
     public void onLoginButtonClicked() {
         loginButton.setOnAction((event) -> {
             if (isUserAuthenticated()) {
                 try {
-                    writeToFile();
+                    StudentReaderWriter.writeStudentToFile(getSelectedStudent());
                 } catch (IOException ex) {
                     Logger.getLogger(LoginWindowController.class.getName())
                             .log(Level.SEVERE, null, ex);
@@ -134,31 +136,11 @@ public class LoginWindowController implements Initializable {
         stage.show();
     }
     
-    private void setSelectedStudent(Student student) {
+    public void setSelectedStudent(Student student) {
         selectedStudent = student;
     }
     
-    private Student getSelectedStudent() {
+    public Student getSelectedStudent() {
         return selectedStudent;
     }
-    
-    private void writeToFile() throws IOException {
-        
-        String fileSeparator = System.getProperty("file.separator");
-    
-        String fileDataPath = "src" + fileSeparator + "data" 
-                + fileSeparator + "dashboard_data.ser";        
-        
-        File file = new File(fileDataPath);
-        
-        System.out.println("Data Written to : " + fileDataPath);
-        
-        file.createNewFile();
-        
-        ObjectOutputStream objectWriter = 
-                new ObjectOutputStream(new FileOutputStream(file));
-        
-        objectWriter.writeObject(getSelectedStudent());
-    }
-    
 }

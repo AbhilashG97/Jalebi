@@ -20,10 +20,8 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.file.Paths;
@@ -53,7 +51,7 @@ import loginwindow.LoginWindowController;
 import pojo.Course;
 import pojo.Student;
 import utilities.CustomAlert;
-import utilities.MockData;
+import utilities.StudentReaderWriter;
 
 /**
  * FXML Controller class
@@ -102,7 +100,7 @@ public class StudentDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        student = readFromDashboardData();
+        student = StudentReaderWriter.readStudentFromFile();
         initializeComboBox();
         onListViewItemClickedTwice();
         onFinanceNavigationButtonClicked();
@@ -199,34 +197,6 @@ public class StudentDashboardController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(scene);
         stage.show();
-    }
-
-    private Student readFromDashboardData() {
-
-        String fileDataPath = "src" + fileSeparator + "data"
-                + fileSeparator + "dashboard_data.ser";
-
-        ObjectInputStream objectInputStream = null;
-        try {
-            objectInputStream
-                    = new ObjectInputStream(new FileInputStream(fileDataPath));
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(MockData.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        } catch (IOException ex) {
-            Logger.getLogger(MockData.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-
-        Student selectedStudent = null;
-        try {
-            selectedStudent = (Student) objectInputStream.readObject();
-        } catch (IOException | ClassNotFoundException ex) {
-            Logger.getLogger(MockData.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
-
-        return selectedStudent;
     }
 
     public void restoreState() {
