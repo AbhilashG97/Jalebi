@@ -15,16 +15,22 @@
  */
 package studentdashboard.financewindow;
 
+import java.io.UnsupportedEncodingException;
 import java.net.URL;
+import java.util.LinkedHashMap;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
-import pojo.Course;
+import pojo.Fine;
 import pojo.Student;
+import utilities.Constants;
+import utilities.StudentReaderWriter;
 
 /**
  * FXML Controller class
@@ -48,10 +54,11 @@ public class FinanceWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
        initializeComboBox();
+       initializeStudent();
     }
         
-    public void initializeStudent(Student student) {
-        this.student = student;
+    public void initializeStudent() {
+        student = StudentReaderWriter.readStudentFromFile();
     }
     
     private void initializeComboBox() {
@@ -66,15 +73,58 @@ public class FinanceWindowController implements Initializable {
 
     public void displayData(int semester) {
         fineListView.getItems().clear();
+        showCurrentSemesterFine();
+        showTotalFine();
         if (student.getFineMap().containsKey(selectedSemester)) {
             student.getFineMap().get(selectedSemester).getFineHashMap()
                    .forEach((key, value) -> {
-                       fineListView.getItems().add(key + " " + value);
+                       if(value != -1) {
+                           fineListView.getItems().add(key + " " + value);
+                       }
                    });
             
         } else {
             System.err.println("Ah oh, something is wrong!");
             fineListView.getItems().clear();
         }
-    }    
+    }
+
+    private void showTotalFine() {
+        LinkedHashMap<Integer, Fine> fineMap = student.getFineMap();
+        int totalFine = 0;
+        for(Fine fine : fineMap.values()) {
+            for(int amount : fine.getFineHashMap().values()) {
+                if(amount != -1) {
+                    totalFine+=amount;
+                }                
+            }
+        }
+        try {
+            totalFineLabel.setText(Constants.getRupeeSymbol()
+                    + "" + totalFine);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(FinanceWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void showCurrentSemesterFine() {
+        int currentSemesterFine = 0;
+        if (student.getFineMap().containsKey(selectedSemester)) {
+            for(int fine : student.getFineMap().get(selectedSemester)
+                    .getFineHashMap().values()) {
+                if(fine != -1) {
+                    currentSemesterFine += fine;
+                }
+            }
+        }
+        try {
+            currentSemesterFineLabel.setText(Constants.getRupeeSymbol()
+                    + "" + currentSemesterFine);
+        } catch (UnsupportedEncodingException ex) {
+            Logger.getLogger(FinanceWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+    }
+    
 }

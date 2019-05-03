@@ -50,6 +50,7 @@ import javafx.stage.Stage;
 import loginwindow.LoginWindowController;
 import pojo.Course;
 import pojo.Student;
+import studentdashboard.financewindow.FinanceWindowController;
 import utilities.CustomAlert;
 import utilities.StudentReaderWriter;
 
@@ -235,7 +236,8 @@ public class StudentDashboardController implements Initializable {
 
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(studentDashboardScene);
-        stage.show();     
+        stage.show();
+        restoreState();
     }
     
     public void onFinanceNavigationButtonClicked() {
@@ -254,7 +256,7 @@ public class StudentDashboardController implements Initializable {
         }
 
         loader.setLocation(url);
-
+        
         try {
             anchorPane = loader.load();
         } catch (IOException ex) {

@@ -40,7 +40,10 @@
                            </font>
                         </Label>
                         <Label fx:id="currentSemesterFineLabel" layoutX="10.0" layoutY="17.0" prefHeight="31.0" prefWidth="133.0" GridPane.columnIndex="1" />
-                        <Label layoutX="144.0" layoutY="17.0" prefHeight="31.0" prefWidth="133.0" text="Total Fine" GridPane.rowIndex="1" />
+                        <Label layoutX="144.0" layoutY="17.0" prefHeight="31.0" prefWidth="133.0" text="Total Fine" GridPane.rowIndex="1">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
                         <Label fx:id="totalFineLabel" layoutX="10.0" layoutY="62.0" prefHeight="31.0" prefWidth="133.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>

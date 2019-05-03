@@ -15,6 +15,8 @@
  */
 package utilities;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  *
  * @author Abhilash G <abhilashg@am.students.amrita.edu>
@@ -29,5 +31,9 @@ public class Constants {
     
     public static final String DEPARTMENT_ME = "ME";
     
-    public static final String ADMINISTRATION_LIBRARY = "Library";    
+    public static final String ADMINISTRATION_LIBRARY = "Library";   
+    
+    public static final String getRupeeSymbol() throws UnsupportedEncodingException {
+        return new String("\u20B9".getBytes("UTF-8"), "UTF-8");
+    }     
 }
