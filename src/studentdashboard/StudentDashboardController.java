@@ -106,6 +106,7 @@ public class StudentDashboardController implements Initializable {
         initializeComboBox();
         onListViewItemClickedTwice();
         onFinanceNavigationButtonClicked();
+        onAnnouncementNavigationButtonClicked();
     }
 
     public void onComboBoxItemSelected(ActionEvent event) {
@@ -239,6 +240,34 @@ public class StudentDashboardController implements Initializable {
         displayData(selectedSemester);
     }
     
+    public void onCoursesNavigationButtonClicked(ActionEvent event) {
+        URL url = null;
+        try {
+            url = Paths.get("src/studentdashboard/StudentDashboard.fxml")
+                    .toUri().toURL();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(LoginWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        FXMLLoader loader = new FXMLLoader();
+        
+        loader.setLocation(url);
+        
+        Parent parent = null;
+        try {
+            parent = loader.load(url);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+
+        Scene studentDashboardScene = new Scene(parent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(studentDashboardScene);
+        stage.show();     
+    }
+    
     public void onFinanceNavigationButtonClicked() {
         financeNavigationButton.setOnAction((event) -> {
         
@@ -264,6 +293,33 @@ public class StudentDashboardController implements Initializable {
         }
 
             borderPane.setCenter(anchorPane);
+        });
+    }
+    
+    public void onAnnouncementNavigationButtonClicked() {
+        announcementNavigationButton.setOnAction((event) -> {
+                    FXMLLoader loader = new FXMLLoader();
+
+            URL url = null;
+            try {
+                url = Paths.get("src/studentdashboard/announcementwindow"
+                        + "/AnnouncementWindow.fxml")
+                        .toUri().toURL();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(StudentDashboardController.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+
+            loader.setLocation(url);
+
+            try {
+                anchorPane = loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(StudentDashboardController.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+
+                borderPane.setCenter(anchorPane);
         });
     }
     

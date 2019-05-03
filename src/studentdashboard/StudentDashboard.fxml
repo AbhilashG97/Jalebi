@@ -17,7 +17,7 @@
 
 <BorderPane fx:id="borderPane" minHeight="0.0" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="studentdashboard.StudentDashboardController">
    <center>
-      <AnchorPane id="AnchorPane" fx:id="anchorPane" minHeight="0.0" prefWidth="600.0">
+      <AnchorPane id="AnchorPane" fx:id="anchorPane" minHeight="0.0" prefHeight="330.0" prefWidth="600.0">
          <children>
             <SplitPane dividerPositions="0.5" layoutY="-2.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
               <items>
@@ -72,7 +72,7 @@
    <bottom>
       <HBox alignment="TOP_CENTER" prefHeight="40.0" prefWidth="600.0" spacing="50.0" BorderPane.alignment="CENTER">
          <children>
-            <Button fx:id="coursesNavigationButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Courses" />
+            <Button fx:id="coursesNavigationButton" mnemonicParsing="false" onAction="#onCoursesNavigationButtonClicked" prefHeight="25.0" prefWidth="100.0" text="Courses" />
             <Button fx:id="financeNavigationButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Finance" />
             <Button fx:id="announcementNavigationButton" mnemonicParsing="false" prefHeight="25.0" prefWidth="100.0" text="Anouncements" />
          </children>
