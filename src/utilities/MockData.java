@@ -1,7 +1,17 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Copyright 2019 Abhilash G <abhilashg@am.students.amrita.edu>.
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *      http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
  */
 package utilities;
 
@@ -17,6 +27,7 @@ import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import pojo.Course;
+import pojo.Fine;
 import pojo.Marks;
 import pojo.Student;
 
@@ -33,12 +44,18 @@ public class MockData {
     
     public void insertMockData() {
         ArrayList<Student> studentList = new ArrayList<>();
-        studentList.add(new Student("Raghu", "maut", getCourseMap()));
-        studentList.add(new Student("Pussy", "billi", getCourseMap()));
-        studentList.add(new Student("Suyash", "chu", getCourseMap()));
-        studentList.add(new Student("Sid", "01", getCourseMap()));
-        studentList.add(new Student("James", "bond", getCourseMap()));
-        studentList.add(new Student("Elia", "martel", getCourseMap()));
+        studentList.add(new Student("raghu", "maut", Constants.DEPARTMENT_CSE, 
+                getCourseMap(), getMockFineMap()));
+        studentList.add(new Student("pussycat", "billi", Constants.DEPARTMENT_CSE, 
+                getCourseMap(), getMockFineMap()));
+        studentList.add(new Student("suyash", "chu", Constants.DEPARTMENT_ECE, 
+                getCourseMap(), getMockFineMap()));
+        studentList.add(new Student("sid", "01", Constants.DEPARTMENT_ECE, 
+                getCourseMap(), getMockFineMap()));
+        studentList.add(new Student("james", "bond", Constants.DEPARTMENT_EEE, 
+                getCourseMap(), getMockFineMap()));
+        studentList.add(new Student("elia", "martel", Constants.DEPARTMENT_EEE, 
+                getCourseMap(), getMockFineMap()));
         
         try {
             writeStduentListToFile(studentList);
@@ -102,6 +119,28 @@ public class MockData {
         courseMap.put(8, getMockCourseList());
         
         return courseMap;
+    }
+    
+    private LinkedHashMap<Integer, Fine> getMockFineMap() {
+        LinkedHashMap<Integer, Fine> fineHashMap = new LinkedHashMap<>();
+        fineHashMap.put(1, getMockFine());
+        fineHashMap.put(2, getMockFine());
+        fineHashMap.put(3, getMockFine());
+        fineHashMap.put(4, getMockFine());
+        fineHashMap.put(5, getMockFine());
+        fineHashMap.put(6, getMockFine());
+        fineHashMap.put(7, getMockFine());
+        fineHashMap.put(8, getMockFine());
+        return fineHashMap;
+    }
+    
+    private Fine getMockFine() {
+        Fine fine = new Fine();
+        fine.setCSEDepartmentFine(100);
+        fine.setLibraryFine(10000);
+        fine.setEEEDepartmentFine(2000);
+        fine.setECEDepartmentFine(3000);
+        return fine;
     }
     
     public void writeStduentListToFile(ArrayList<Student> studentList) 

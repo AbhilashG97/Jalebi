@@ -23,7 +23,7 @@
                         <Font size="16.0" />
                      </font>
                   </Label>
-                  <ComboBox fx:id="selectSemesterComboBox" layoutX="73.0" layoutY="49.0" prefWidth="150.0" promptText="Select Semester" />
+                  <ComboBox fx:id="selectSemesterComboBox" layoutX="73.0" layoutY="49.0" onAction="#onComboBoxItemSelected" prefWidth="150.0" promptText="Select Semester" />
                   <GridPane layoutX="15.0" layoutY="216.0" prefHeight="90.0" prefWidth="267.0">
                     <columnConstraints>
                       <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -39,9 +39,9 @@
                               <Font name="System Bold" size="12.0" />
                            </font>
                         </Label>
-                        <Label layoutX="10.0" layoutY="17.0" prefHeight="31.0" prefWidth="133.0" GridPane.columnIndex="1" />
+                        <Label fx:id="currentSemesterFineLabel" layoutX="10.0" layoutY="17.0" prefHeight="31.0" prefWidth="133.0" GridPane.columnIndex="1" />
                         <Label layoutX="144.0" layoutY="17.0" prefHeight="31.0" prefWidth="133.0" text="Total Fine" GridPane.rowIndex="1" />
-                        <Label layoutX="10.0" layoutY="62.0" prefHeight="31.0" prefWidth="133.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <Label fx:id="totalFineLabel" layoutX="10.0" layoutY="62.0" prefHeight="31.0" prefWidth="133.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                      </children>
                   </GridPane>
                </children>

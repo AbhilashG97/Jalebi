@@ -21,4 +21,13 @@ package utilities;
  */
 public class Constants {
     
+    public static final String DEPARTMENT_CSE = "CSE";
+    
+    public static final String DEPARTMENT_ECE = "ECE";
+    
+    public static final String DEPARTMENT_EEE = "EEE";
+    
+    public static final String DEPARTMENT_ME = "ME";
+    
+    public static final String ADMINISTRATION_LIBRARY = "Library";    
 }
