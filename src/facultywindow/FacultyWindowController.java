@@ -16,7 +16,9 @@
 package facultywindow;
 
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -24,12 +26,21 @@ import java.util.logging.Logger;
 import java.util.stream.Collectors;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import loginwindow.LoginWindowController;
 import pojo.Course;
 import pojo.Student;
+import utilities.CustomAlert;
 import utilities.ObjectReaderWriter;
 
 /**
@@ -48,6 +59,14 @@ public class FacultyWindowController implements Initializable {
     @FXML private TextField endSemesterMarks;
     @FXML private TextField attendanceTextField;
     @FXML private Button doneButton;
+
+    @FXML
+    private MenuItem aboutMenuItem;
+    @FXML
+    private MenuItem logoutMenuItem;
+
+    @FXML
+    private MenuBar menuBar;
     
     private Student selectedStudent;
     private int selectedSemester;
@@ -116,13 +135,13 @@ public class FacultyWindowController implements Initializable {
                     .setFirstInternal(Integer.parseInt(firstPeriodicalMarks
                             .getText()));
             course.getMarks()
-                    .setSecondInternal(Integer.parseInt(firstPeriodicalMarks
+                    .setSecondInternal(Integer.parseInt(secondPeriodicalMarks
                             .getText()));
             course.getMarks()
-                    .setContinuousEvaluationMarks(Integer.parseInt(firstPeriodicalMarks
+                    .setContinuousEvaluationMarks(Integer.parseInt(continousEvaluationMarks
                             .getText()));
             course.getMarks()
-                    .setEndSemester(Integer.parseInt(firstPeriodicalMarks
+                    .setEndSemester(Integer.parseInt(endSemesterMarks
                             .getText()));
             course.setAttendance(Integer.parseInt(attendanceTextField.getText()));
         }
@@ -130,6 +149,7 @@ public class FacultyWindowController implements Initializable {
     
     public void onDoneButtonClicked() {
         doneButton.setOnAction((event) -> {
+            editAllDetails();
             selectedStudents.set(0, selectedStudent);
             try {
                 new ObjectReaderWriter<ArrayList<Student>>("database.ser")
@@ -140,4 +160,39 @@ public class FacultyWindowController implements Initializable {
             }
         });
     }
+    
+    public void logout(ActionEvent event) {
+
+        URL url = null;
+        try {
+            url = Paths.get("src/loginwindow/LoginWindow.fxml")
+                    .toUri().toURL();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(LoginWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(url);
+
+        Parent parent = null;
+        try {
+            parent = loader.load(url);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+
+        Scene studentDashboardScene = new Scene(parent);
+
+        Stage stage = (Stage) menuBar.getScene().getWindow();
+        stage.setScene(studentDashboardScene);
+        stage.show();
+    }
+
+    public void about() {
+        new CustomAlert(Alert.AlertType.INFORMATION, "Student Management System "
+                + "V1.0\n" + "Alpha Version 3.0")
+                .showAlert();
+    }    
 }

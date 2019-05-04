@@ -14,7 +14,7 @@
    <children>
       <StackPane maxWidth="1.7976931348623157E308" prefHeight="150.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER" prefHeight="54.0" prefWidth="634.0" text="Amrita Student Management System">
+            <Label alignment="CENTER" prefHeight="54.0" prefWidth="634.0" text="Student Management System">
                <font>
                   <Font size="31.0" />
                </font>
