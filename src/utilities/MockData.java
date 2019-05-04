@@ -34,8 +34,8 @@ import pojo.Marks;
 import pojo.Student;
 
 /**
- * This class generates mock data and also provides methods which can be used 
- * to read/ write the mock data to a file. 
+ * This class generates mock data and also provides methods which can be used to
+ * read/ write the mock data to a file.
  *
  * @author Abhilash G <abhilashg@am.students.amrita.edu>
  */
@@ -45,7 +45,7 @@ public class MockData {
 
     private final String fileDataPath = "src" + fileSeparator + "data"
             + fileSeparator + "database.ser";
-    
+
     public ArrayList<Student> getStudentList() {
         ArrayList<Student> studentList = new ArrayList<>();
         studentList.add(new Student("raghu", "maut", Constants.DEPARTMENT_CSE,
@@ -59,12 +59,12 @@ public class MockData {
         studentList.add(new Student("james", "bond", Constants.DEPARTMENT_EEE,
                 getCourseMap(), getMockFineMap()));
         studentList.add(new Student("elia", "martel", Constants.DEPARTMENT_EEE,
-                getCourseMap(), getMockFineMap())); 
-        
+                getCourseMap(), getMockFineMap()));
+
         return studentList;
     }
-    
-    public void insertStudentMockData() {   
+
+    public void insertStudentMockData() {
         try {
             writeStudentListToFile(getStudentList());
         } catch (IOException ex) {
@@ -98,37 +98,37 @@ public class MockData {
 
     public ArrayList<Faculty> getFacultyList() {
         ArrayList<Faculty> facultyList = new ArrayList<>();
-        
+
         facultyList.add(new Faculty(Constants.DEPARTMENT_CSE, "Fraghu", "death",
-        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
-                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                        getStudentList()).get(Constants.DEPARTMENT_CSE),
                 getAnnouncementList()));
-        
+
         facultyList.add(new Faculty(Constants.DEPARTMENT_CSE, "Fjames", "jam",
-        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
-                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                        getStudentList()).get(Constants.DEPARTMENT_CSE),
                 getAnnouncementList()));
-        
+
         facultyList.add(new Faculty(Constants.DEPARTMENT_ECE, "Fyum", "yum",
-        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
-                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                        getStudentList()).get(Constants.DEPARTMENT_CSE),
                 getAnnouncementList()));
-        
+
         facultyList.add(new Faculty(Constants.DEPARTMENT_ECE, "Fhawk", "hawk",
-        "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
-                getStudentList()).get(Constants.DEPARTMENT_CSE), 
+                "Professor", Utility.getSortedStudents(Constants.DEPARTMENT_CSE,
+                        getStudentList()).get(Constants.DEPARTMENT_CSE),
                 getAnnouncementList()));
-        
+
         return facultyList;
     }
-    
-    public void insertFacultyMockData() throws IOException {
-        
-    String fileSeparator = System.getProperty("file.separator");
 
-    String fileDataPath = "src" + fileSeparator + "data"
-            + fileSeparator + "faculty_database.ser";
-    
+    public void insertFacultyMockData() throws IOException {
+
+        String fileSeparator = System.getProperty("file.separator");
+
+        String fileDataPath = "src" + fileSeparator + "data"
+                + fileSeparator + "faculty_database.ser";
+
         File file = new File(fileDataPath);
         System.out.println("Data Written to : " + fileDataPath);
         file.createNewFile();
@@ -137,14 +137,14 @@ public class MockData {
 
         objectWriter.writeObject(getFacultyList());
     }
-    
-    public ArrayList<Faculty> readFacultyMockData() {
-        
-    String fileSeparator = System.getProperty("file.separator");
 
-    String fileDataPath = "src" + fileSeparator + "data"
-            + fileSeparator + "faculty_database.ser";        
-        
+    public ArrayList<Faculty> readFacultyMockData() {
+
+        String fileSeparator = System.getProperty("file.separator");
+
+        String fileDataPath = "src" + fileSeparator + "data"
+                + fileSeparator + "faculty_database.ser";
+
         ObjectInputStream objectInputStream = null;
         try {
             objectInputStream
@@ -165,8 +165,8 @@ public class MockData {
                     .log(Level.SEVERE, null, ex);
         }
         return data;
-    }    
-    
+    }
+
     public void writeAdministratorListToFile() {
         try {
             new ObjectReaderWriter<ArrayList<Administrator>>("admin_database.ser")
@@ -176,24 +176,22 @@ public class MockData {
                     .log(Level.SEVERE, null, ex);
         }
     }
-    
+
     public ArrayList<Administrator> readAdministratorListFromFile() {
         return new ObjectReaderWriter<ArrayList<Administrator>>("admin_database.ser")
                 .readObjectFromFile();
     }
-    
+
     public ArrayList<Administrator> getAdministratorList() {
-        
+
         ArrayList<Administrator> administratorList = new ArrayList<>();
         administratorList.add(new Administrator("Araghu", "maut"));
-        administratorList.add(new Administrator("Asid", "happy"));        
+        administratorList.add(new Administrator("Asid", "happy"));
         return administratorList;
     }
-    
 
     private ArrayList<Course> getMockCourseList1() {
-    	ArrayList<Course> courseList1 = new ArrayList<>();
-
+        ArrayList<Course> courseList1 = new ArrayList<>();
 
         //semester 1
         courseList1.add(new Course("Physics",
@@ -206,10 +204,11 @@ public class MockData {
                 4, "CSE121", new Marks(49, 49, 89, 29), 88));
         courseList1.add(new Course("Mechanical Lab",
                 4, "MEC101", new Marks(49, 49, 89, 29), 88));
+        return courseList1;
     }
-    private ArrayList<Course> getMockCourseList2() {
-    	ArrayList<Course> courseList2 = new ArrayList<>();
 
+    private ArrayList<Course> getMockCourseList2() {
+        ArrayList<Course> courseList2 = new ArrayList<>();
 
         //semester2
         courseList2.add(new Course("Introduction to C",
@@ -222,13 +221,15 @@ public class MockData {
                 4, "CHE121", new Marks(49, 49, 89, 29), 88));
         courseList2.add(new Course("Computer Essentials",
                 4, "CSE202", new Marks(49, 49, 89, 29), 88));
+        return courseList2;
     }
+
     private ArrayList<Course> getMockCourseList3() {
-    	ArrayList<Course> courseList3 = new ArrayList<>();
+        ArrayList<Course> courseList3 = new ArrayList<>();
 
         //semester3
         courseList3.add(new Course("Object Oriented Programming",
-                4,"CSE202", new Marks(44, 45, 40, 24), 77));
+                4, "CSE202", new Marks(44, 45, 40, 24), 77));
         courseList3.add(new Course("Introduction to DataStructures",
                 4, "CSE203", new Marks(49, 49, 89, 29), 88));
         courseList3.add(new Course("Matrix",
@@ -237,11 +238,13 @@ public class MockData {
                 4, "ELE101", new Marks(49, 49, 89, 29), 88));
         courseList3.add(new Course("Digital Circuits",
                 4, "ECE101", new Marks(49, 49, 89, 29), 88));
+        return courseList3;
     }
+
     private ArrayList<Course> getMockCourseList4() {
-    	ArrayList<Course> courseList4 = new ArrayList<>();
-    
-    	courseList4.add(new Course("Operating Systems",
+        ArrayList<Course> courseList4 = new ArrayList<>();
+
+        courseList4.add(new Course("Operating Systems",
                 4, "CSE303", new Marks(44, 45, 40, 24), 77));
         courseList4.add(new Course("Embedded Systems",
                 4, "ECE201", new Marks(49, 49, 89, 29), 88));
@@ -252,12 +255,13 @@ public class MockData {
         courseList4.add(new Course("Advance Datastructures",
                 4, "MEC101", new Marks(49, 49, 89, 29), 88));
 
-
+        return courseList4;
     }
-    private ArrayList<Course> getMockCourseList5() {
-    	ArrayList<Course> courseList5 = new ArrayList<>();
 
-    	//semester5
+    private ArrayList<Course> getMockCourseList5() {
+        ArrayList<Course> courseList5 = new ArrayList<>();
+
+        //semester5
         courseList5.add(new Course("Database Management System",
                 4, "CSE305", new Marks(44, 45, 40, 24), 77));
         courseList5.add(new Course("AVP",
@@ -268,13 +272,13 @@ public class MockData {
                 4, "CSE104", new Marks(49, 49, 89, 29), 88));
         courseList5.add(new Course("TOC",
                 4, "CSE122", new Marks(49, 49, 89, 29), 88));
+        return courseList5;
     }
+
     private ArrayList<Course> getMockCourseList6() {
-    	ArrayList<Course> courseList6 = new ArrayList<>();
+        ArrayList<Course> courseList6 = new ArrayList<>();
 
- 
         //semester6
-
         courseList6.add(new Course("Natural Language Processing",
                 4, "CSE865", new Marks(49, 49, 89, 25), 80));
         courseList6.add(new Course("Pattern Recognition",
@@ -287,10 +291,13 @@ public class MockData {
                 4, "CSE312", new Marks(49, 49, 89, 27), 77));
         courseList6.add(new Course("Softskills",
                 4, "SKL101", new Marks(49, 49, 89, 29), 88));
-    }
-    private ArrayList<Course> getMockCourseList7() {
-    	ArrayList<Course> courseList7 = new ArrayList<>();
 
+        return courseList6;
+
+    }
+
+    private ArrayList<Course> getMockCourseList7() {
+        ArrayList<Course> courseList7 = new ArrayList<>();
 
         //semester 7
         courseList7.add(new Course("PPC",
@@ -301,18 +308,23 @@ public class MockData {
                 4, "CSE403", new Marks(49, 49, 89, 29), 88));
         courseList7.add(new Course("Machine Learning",
                 4, "CSE404", new Marks(49, 49, 89, 29), 88));
+        return courseList7;
     }
-
-
-
-
-
 
     private ArrayList<Course> getMockCourseList8() {
- 
+
         ArrayList<Course> courseList8 = new ArrayList<>();
+        courseList8.add(new Course("PPC",
+                4, "CSE401", new Marks(44, 45, 40, 24), 77));
+        courseList8.add(new Course("Cryptography",
+                4, "CSE402", new Marks(49, 49, 89, 29), 88));
+        courseList8.add(new Course("Android",
+                4, "CSE403", new Marks(49, 49, 89, 29), 88));
+        courseList8.add(new Course("Machine Learning",
+                4, "CSE404", new Marks(49, 49, 89, 29), 88));
+        return courseList8;
     }
-        
+
     private LinkedHashMap<Integer, ArrayList<Course>> getCourseMap() {
         LinkedHashMap<Integer, ArrayList<Course>> courseMap
                 = new LinkedHashMap<>();
@@ -349,7 +361,7 @@ public class MockData {
         fine.setECEDepartmentFine(3000);
         return fine;
     }
-    
+
     private ArrayList<String> getAnnouncementList() {
         ArrayList<String> announcementList = new ArrayList<>();
         announcementList.add("Complete your software engineering assignments");
@@ -359,7 +371,7 @@ public class MockData {
         announcementList.add("There is compiler lab record assignment submission tomorrow");
         return announcementList;
     }
-    
+
     private void writeStudentListToFile(ArrayList<Student> studentList)
             throws IOException {
 
