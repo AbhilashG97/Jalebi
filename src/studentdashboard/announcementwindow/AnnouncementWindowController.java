@@ -25,7 +25,7 @@ import javafx.scene.control.ListView;
 import pojo.Faculty;
 import pojo.Student;
 import utilities.MockData;
-import utilities.StudentReaderWriter;
+import utilities.ObjectReaderWriter;
 
 /**
  * FXML Controller class
@@ -34,15 +34,15 @@ import utilities.StudentReaderWriter;
  */
 public class AnnouncementWindowController implements Initializable {
 
-    @FXML 
+    @FXML
     private ListView announcementListView;
-    
+
     @FXML
     private Button refreshButton;
-    
+
     private Faculty faculty;
     private Student student;
-    
+
     /**
      * Initializes the controller class.
      */
@@ -51,27 +51,28 @@ public class AnnouncementWindowController implements Initializable {
         initializeStudent();
         getFaculty();
         showAnnouncements();
-    }    
-    
-    public void initializeStudent() {
-        student = StudentReaderWriter.readStudentFromFile();
     }
-    
+
+    public void initializeStudent() {
+        student = new ObjectReaderWriter<Student>("dashboard_data.ser")
+                .readObjectFromFile();
+    }
+
     private Faculty getFaculty() {
-      ArrayList<Faculty> facultyList = new MockData().readFacultyMockData();
-        for(Faculty faculty : facultyList) {
-            if(faculty.getDepartment().equals(student.getDepartment())) {
+        ArrayList<Faculty> facultyList = new MockData().readFacultyMockData();
+        for (Faculty faculty : facultyList) {
+            if (faculty.getDepartment().equals(student.getDepartment())) {
                 this.faculty = faculty;
                 break;
             }
         }
         return faculty;
     }
-    
+
     public void showAnnouncements() {
         announcementListView.getItems().addAll(faculty.getAnnoucements());
     }
-    
+
     public void onRefreshButtonClicked() {
         refreshButton.setOnAction((event) -> {
             announcementListView.getItems().clear();
@@ -79,5 +80,5 @@ public class AnnouncementWindowController implements Initializable {
             showAnnouncements();
         });
     }
-    
+
 }

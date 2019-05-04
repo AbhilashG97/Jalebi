@@ -50,9 +50,8 @@ import javafx.stage.Stage;
 import loginwindow.LoginWindowController;
 import pojo.Course;
 import pojo.Student;
-import studentdashboard.financewindow.FinanceWindowController;
 import utilities.CustomAlert;
-import utilities.StudentReaderWriter;
+import utilities.ObjectReaderWriter;
 
 /**
  * FXML Controller class
@@ -74,20 +73,21 @@ public class StudentDashboardController implements Initializable {
     @FXML
     private MenuBar dashboardMenuBar;
 
-    @FXML 
+    @FXML
     private Button coursesNavigationButton;
-    
+
     @FXML
     private Button financeNavigationButton;
-    
+
     @FXML
     private Button announcementNavigationButton;
-    
-    @FXML 
+
+    @FXML
     private BorderPane borderPane;
-    
-    @FXML AnchorPane anchorPane;
-    
+
+    @FXML
+    AnchorPane anchorPane;
+
     private Student student;
     private int selectedSemester;
 
@@ -101,7 +101,8 @@ public class StudentDashboardController implements Initializable {
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        student = StudentReaderWriter.readStudentFromFile();
+        student = new ObjectReaderWriter<Student>("dashboard_data.ser")
+                .readObjectFromFile();
         initializeComboBox();
         onListViewItemClickedTwice();
         onFinanceNavigationButtonClicked();
@@ -210,7 +211,7 @@ public class StudentDashboardController implements Initializable {
         selectSemesterComboBox.getSelectionModel().select(selectedSemester - 1);
         displayData(selectedSemester);
     }
-    
+
     public void onCoursesNavigationButtonClicked(ActionEvent event) {
         URL url = null;
         try {
@@ -221,9 +222,9 @@ public class StudentDashboardController implements Initializable {
                     .log(Level.SEVERE, null, ex);
         }
         FXMLLoader loader = new FXMLLoader();
-        
+
         loader.setLocation(url);
-        
+
         Parent parent = null;
         try {
             parent = loader.load(url);
@@ -239,38 +240,38 @@ public class StudentDashboardController implements Initializable {
         stage.show();
         restoreState();
     }
-    
+
     public void onFinanceNavigationButtonClicked() {
         financeNavigationButton.setOnAction((event) -> {
-        
-        FXMLLoader loader = new FXMLLoader();
 
-        URL url = null;
-        try {
-            url = Paths.get("src/studentdashboard/financewindow"
-                    + "/FinanceWindow.fxml")
-                    .toUri().toURL();
-        } catch (MalformedURLException ex) {
-            Logger.getLogger(StudentDashboardController.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
+            FXMLLoader loader = new FXMLLoader();
 
-        loader.setLocation(url);
-        
-        try {
-            anchorPane = loader.load();
-        } catch (IOException ex) {
-            Logger.getLogger(StudentDashboardController.class.getName())
-                    .log(Level.SEVERE, null, ex);
-        }
+            URL url = null;
+            try {
+                url = Paths.get("src/studentdashboard/financewindow"
+                        + "/FinanceWindow.fxml")
+                        .toUri().toURL();
+            } catch (MalformedURLException ex) {
+                Logger.getLogger(StudentDashboardController.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
+
+            loader.setLocation(url);
+
+            try {
+                anchorPane = loader.load();
+            } catch (IOException ex) {
+                Logger.getLogger(StudentDashboardController.class.getName())
+                        .log(Level.SEVERE, null, ex);
+            }
 
             borderPane.setCenter(anchorPane);
         });
     }
-    
+
     public void onAnnouncementNavigationButtonClicked() {
         announcementNavigationButton.setOnAction((event) -> {
-                    FXMLLoader loader = new FXMLLoader();
+            FXMLLoader loader = new FXMLLoader();
 
             URL url = null;
             try {
@@ -291,10 +292,10 @@ public class StudentDashboardController implements Initializable {
                         .log(Level.SEVERE, null, ex);
             }
 
-                borderPane.setCenter(anchorPane);
+            borderPane.setCenter(anchorPane);
         });
     }
-    
+
     private void writeEnteredDataToFile() throws IOException {
 
         File file = new File(fileDataPath);
@@ -350,5 +351,5 @@ public class StudentDashboardController implements Initializable {
                 + "V1.0\n" + "Alpha Version 1.0")
                 .showAlert();
     }
-    
+
 }

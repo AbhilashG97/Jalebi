@@ -30,7 +30,7 @@ import javafx.scene.control.ListView;
 import pojo.Fine;
 import pojo.Student;
 import utilities.Constants;
-import utilities.StudentReaderWriter;
+import utilities.ObjectReaderWriter;
 
 /**
  * FXML Controller class
@@ -39,32 +39,37 @@ import utilities.StudentReaderWriter;
  */
 public class FinanceWindowController implements Initializable {
 
-    @FXML private ComboBox selectSemesterComboBox;
-    @FXML private ListView fineListView;
-    @FXML private Label currentSemesterFineLabel;
-    @FXML private Label totalFineLabel;
-    
+    @FXML
+    private ComboBox selectSemesterComboBox;
+    @FXML
+    private ListView fineListView;
+    @FXML
+    private Label currentSemesterFineLabel;
+    @FXML
+    private Label totalFineLabel;
+
     private Student student;
-    
+
     private int selectedSemester;
-    
+
     /**
      * Initializes the controller class.
      */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-       initializeComboBox();
-       initializeStudent();
+        initializeComboBox();
+        initializeStudent();
     }
-        
+
     public void initializeStudent() {
-        student = StudentReaderWriter.readStudentFromFile();
+        student = new ObjectReaderWriter<Student>("dashboard_data.ser")
+                .readObjectFromFile();
     }
-    
+
     private void initializeComboBox() {
         selectSemesterComboBox.getItems().addAll(1, 2, 3, 4, 5, 6, 7, 8);
     }
-    
+
     public void onComboBoxItemSelected(ActionEvent event) {
         selectedSemester = Integer.parseInt(selectSemesterComboBox
                 .getSelectionModel().getSelectedItem().toString());
@@ -77,12 +82,12 @@ public class FinanceWindowController implements Initializable {
         showTotalFine();
         if (student.getFineMap().containsKey(selectedSemester)) {
             student.getFineMap().get(selectedSemester).getFineHashMap()
-                   .forEach((key, value) -> {
-                       if(value != -1) {
-                           fineListView.getItems().add(key + " " + value);
-                       }
-                   });
-            
+                    .forEach((key, value) -> {
+                        if (value != -1) {
+                            fineListView.getItems().add(key + " " + value);
+                        }
+                    });
+
         } else {
             System.err.println("Ah oh, something is wrong!");
             fineListView.getItems().clear();
@@ -92,11 +97,11 @@ public class FinanceWindowController implements Initializable {
     private void showTotalFine() {
         LinkedHashMap<Integer, Fine> fineMap = student.getFineMap();
         int totalFine = 0;
-        for(Fine fine : fineMap.values()) {
-            for(int amount : fine.getFineHashMap().values()) {
-                if(amount != -1) {
-                    totalFine+=amount;
-                }                
+        for (Fine fine : fineMap.values()) {
+            for (int amount : fine.getFineHashMap().values()) {
+                if (amount != -1) {
+                    totalFine += amount;
+                }
             }
         }
         try {
@@ -107,13 +112,13 @@ public class FinanceWindowController implements Initializable {
                     .log(Level.SEVERE, null, ex);
         }
     }
-    
+
     private void showCurrentSemesterFine() {
         int currentSemesterFine = 0;
         if (student.getFineMap().containsKey(selectedSemester)) {
-            for(int fine : student.getFineMap().get(selectedSemester)
+            for (int fine : student.getFineMap().get(selectedSemester)
                     .getFineHashMap().values()) {
-                if(fine != -1) {
+                if (fine != -1) {
                     currentSemesterFine += fine;
                 }
             }
@@ -126,5 +131,5 @@ public class FinanceWindowController implements Initializable {
                     .log(Level.SEVERE, null, ex);
         }
     }
-    
+
 }

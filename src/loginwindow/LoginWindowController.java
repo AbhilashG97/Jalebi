@@ -37,7 +37,7 @@ import javafx.stage.Stage;
 import pojo.Student;
 import utilities.CustomAlert;
 import utilities.MockData;
-import utilities.StudentReaderWriter;
+import utilities.ObjectReaderWriter;
 
 /**
  * FXML Controller class
@@ -46,11 +46,15 @@ import utilities.StudentReaderWriter;
  */
 public class LoginWindowController implements Initializable {
 
-    @FXML private TextField usernameTextField;
-    @FXML private PasswordField passwordField;
-    @FXML private Button loginButton;
-    @FXML private Student selectedStudent;
-    
+    @FXML
+    private TextField usernameTextField;
+    @FXML
+    private PasswordField passwordField;
+    @FXML
+    private Button loginButton;
+    @FXML
+    private Student selectedStudent;
+
     /**
      * Initializes the controller class
      */
@@ -58,16 +62,17 @@ public class LoginWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         onLoginButtonClicked();
     }
-    
+
     /**
-     * This method listens for click events and changes the scene if the 
-     * Student is authenticated. 
+     * This method listens for click events and changes the scene if the Student
+     * is authenticated.
      */
     public void onLoginButtonClicked() {
         loginButton.setOnAction((event) -> {
             if (isUserAuthenticated()) {
                 try {
-                    StudentReaderWriter.writeStudentToFile(getSelectedStudent());
+                    new ObjectReaderWriter<Student>("dashboard_data.ser")
+                            .writeObjectToFile(getSelectedStudent());
                 } catch (IOException ex) {
                     Logger.getLogger(LoginWindowController.class.getName())
                             .log(Level.SEVERE, null, ex);
@@ -87,14 +92,14 @@ public class LoginWindowController implements Initializable {
      * @return true if the user is authenticated else return false
      */
     private boolean isUserAuthenticated() {
-        
+
         ArrayList<Student> data = new MockData().readStudentMockData();
-        
-        for(Student student : data) {
-            if(student.getPassword()
-                .equals(passwordField.getText().trim())
-                && student.getUsername()
-                        .equals(usernameTextField.getText().trim())) {
+
+        for (Student student : data) {
+            if (student.getPassword()
+                    .equals(passwordField.getText().trim())
+                    && student.getUsername()
+                            .equals(usernameTextField.getText().trim())) {
                 setSelectedStudent(student);
                 return true;
             }
@@ -118,9 +123,9 @@ public class LoginWindowController implements Initializable {
                     .log(Level.SEVERE, null, ex);
         }
         FXMLLoader loader = new FXMLLoader();
-        
+
         loader.setLocation(url);
-        
+
         Parent parent = null;
         try {
             parent = loader.load(url);
@@ -135,11 +140,11 @@ public class LoginWindowController implements Initializable {
         stage.setScene(studentDashboardScene);
         stage.show();
     }
-    
+
     public void setSelectedStudent(Student student) {
         selectedStudent = student;
     }
-    
+
     public Student getSelectedStudent() {
         return selectedStudent;
     }

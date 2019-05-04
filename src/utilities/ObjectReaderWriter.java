@@ -24,47 +24,51 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import pojo.Student;
 
 /**
- * This class writes a Student to a file and also reads 
- * a Student from a file
+ * This is a generic utility class which reads and writes 
+ * objects to a file.
  * @author Abhilash G <abhilashg@am.students.amrita.edu>
  */
-public class StudentReaderWriter {
+public class ObjectReaderWriter<T> {
     
-    private static final String FILE_SEPARATOR 
+    private final String FILE_SEPARATOR 
             = System.getProperty("file.separator");
     
-    private static final String FILE_DATAPATH = "src" + FILE_SEPARATOR + "data" 
-                + FILE_SEPARATOR + "dashboard_data.ser";
+    private String fileDatapath = "src" + FILE_SEPARATOR + "data" 
+                + FILE_SEPARATOR;
+    
+    public ObjectReaderWriter(String fileName) {
+        fileDatapath = fileDatapath + fileName;
+    }
+    
     
     /**
-     * This method writes a Student object to a file
-     * @param student : Student object to be written to a file
+     * This method writes an object of type T to a file
+     * @param t : The Object to be written to the file
      * @throws IOException 
      */
-    public static void writeStudentToFile(Student student) throws IOException {
+    public void writeObjectToFile(T t) throws IOException {
 
-        File file = new File(FILE_DATAPATH);
-        System.out.println("Data Written to : " + FILE_DATAPATH);
+        File file = new File(fileDatapath);
+        System.out.println("Data Written to : " + fileDatapath);
         file.createNewFile();
         ObjectOutputStream objectWriter = 
                 new ObjectOutputStream(new FileOutputStream(file));
 
-        objectWriter.writeObject(student);
+        objectWriter.writeObject(t);
     }
     
     /**
-     * This method reads a Student object from a file
-     * @return : A Student object that is read from a file is returned
+     * This method reads an object of type T from a file
+     * @return : An object of type T that is read from a file is returned
      */
-    public static Student readStudentFromFile() {
+    public T readObjectFromFile() {
 
         ObjectInputStream objectInputStream = null;
         try {
             objectInputStream
-                    = new ObjectInputStream(new FileInputStream(FILE_DATAPATH));
+                    = new ObjectInputStream(new FileInputStream(fileDatapath));
         } catch (FileNotFoundException ex) {
             Logger.getLogger(MockData.class.getName())
                     .log(Level.SEVERE, null, ex);
@@ -73,15 +77,14 @@ public class StudentReaderWriter {
                     .log(Level.SEVERE, null, ex);
         }
 
-        Student selectedStudent = null;
+        T selectedObject = null;
         try {
-            selectedStudent = (Student) objectInputStream.readObject();
+            selectedObject = (T) objectInputStream.readObject();
         } catch (IOException | ClassNotFoundException ex) {
             Logger.getLogger(MockData.class.getName())
                     .log(Level.SEVERE, null, ex);
         }
 
-        return selectedStudent;
+        return selectedObject;
     }
-    
 }
