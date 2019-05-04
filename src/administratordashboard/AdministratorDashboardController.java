@@ -200,5 +200,5 @@ public class AdministratorDashboardController implements Initializable {
         new CustomAlert(Alert.AlertType.INFORMATION, "Student Management System "
                 + "V1.0\n" + "Alpha Version 1.0")
                 .showAlert();
-    }  
+    }   
 }
