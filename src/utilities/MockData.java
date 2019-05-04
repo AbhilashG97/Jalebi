@@ -190,15 +190,10 @@ public class MockData {
         return administratorList;
     }
     
-    private ArrayList<Course> getMockCourseList() {
-        ArrayList<Course> courseList1 = new ArrayList<>();
-        ArrayList<Course> courseList2 = new ArrayList<>();
-        ArrayList<Course> courseList3 = new ArrayList<>();
-        ArrayList<Course> courseList4 = new ArrayList<>();
-        ArrayList<Course> courseList5 = new ArrayList<>();
-        ArrayList<Course> courseList6 = new ArrayList<>();
-        ArrayList<Course> courseList7 = new ArrayList<>();
-        ArrayList<Course> courseList8 = new ArrayList<>();
+
+    private ArrayList<Course> getMockCourseList1() {
+    	ArrayList<Course> courseList1 = new ArrayList<>();
+
 
         //semester 1
         courseList1.add(new Course("Physics",
@@ -211,6 +206,10 @@ public class MockData {
                 4, "CSE121", new Marks(49, 49, 89, 29), 88));
         courseList1.add(new Course("Mechanical Lab",
                 4, "MEC101", new Marks(49, 49, 89, 29), 88));
+    }
+    private ArrayList<Course> getMockCourseList2() {
+    	ArrayList<Course> courseList2 = new ArrayList<>();
+
 
         //semester2
         courseList2.add(new Course("Introduction to C",
@@ -223,6 +222,9 @@ public class MockData {
                 4, "CHE121", new Marks(49, 49, 89, 29), 88));
         courseList2.add(new Course("Computer Essentials",
                 4, "CSE202", new Marks(49, 49, 89, 29), 88));
+    }
+    private ArrayList<Course> getMockCourseList3() {
+    	ArrayList<Course> courseList3 = new ArrayList<>();
 
         //semester3
         courseList3.add(new Course("Object Oriented Programming",
@@ -235,9 +237,11 @@ public class MockData {
                 4, "ELE101", new Marks(49, 49, 89, 29), 88));
         courseList3.add(new Course("Digital Circuits",
                 4, "ECE101", new Marks(49, 49, 89, 29), 88));
-
-        //semester4
-        courseList4.add(new Course("Operating Systems",
+    }
+    private ArrayList<Course> getMockCourseList4() {
+    	ArrayList<Course> courseList4 = new ArrayList<>();
+    
+    	courseList4.add(new Course("Operating Systems",
                 4, "CSE303", new Marks(44, 45, 40, 24), 77));
         courseList4.add(new Course("Embedded Systems",
                 4, "ECE201", new Marks(49, 49, 89, 29), 88));
@@ -248,7 +252,12 @@ public class MockData {
         courseList4.add(new Course("Advance Datastructures",
                 4, "MEC101", new Marks(49, 49, 89, 29), 88));
 
-        //semester5
+
+    }
+    private ArrayList<Course> getMockCourseList5() {
+    	ArrayList<Course> courseList5 = new ArrayList<>();
+
+    	//semester5
         courseList5.add(new Course("Database Management System",
                 4, "CSE305", new Marks(44, 45, 40, 24), 77));
         courseList5.add(new Course("AVP",
@@ -259,6 +268,10 @@ public class MockData {
                 4, "CSE104", new Marks(49, 49, 89, 29), 88));
         courseList5.add(new Course("TOC",
                 4, "CSE122", new Marks(49, 49, 89, 29), 88));
+    }
+    private ArrayList<Course> getMockCourseList6() {
+    	ArrayList<Course> courseList6 = new ArrayList<>();
+
  
         //semester6
 
@@ -273,7 +286,10 @@ public class MockData {
         courseList6.add(new Course("Computer Networks",
                 4, "CSE312", new Marks(49, 49, 89, 27), 77));
         courseList6.add(new Course("Softskills",
-                4, "SKL101", new Marks(49, 49, 89, 29), 88));\
+                4, "SKL101", new Marks(49, 49, 89, 29), 88));
+    }
+    private ArrayList<Course> getMockCourseList7() {
+    	ArrayList<Course> courseList7 = new ArrayList<>();
 
 
         //semester 7
@@ -285,16 +301,18 @@ public class MockData {
                 4, "CSE403", new Marks(49, 49, 89, 29), 88));
         courseList7.add(new Course("Machine Learning",
                 4, "CSE404", new Marks(49, 49, 89, 29), 88));
-
-
-        //semester8
-        courseList8.add(new Course("Final Year Project",
-                4,"CSE411", new Marks(44, 45, 40, 24), 77));
-        
-
-        return courseList;
     }
 
+
+
+
+
+
+    private ArrayList<Course> getMockCourseList8() {
+ 
+        ArrayList<Course> courseList8 = new ArrayList<>();
+    }
+        
     private LinkedHashMap<Integer, ArrayList<Course>> getCourseMap() {
         LinkedHashMap<Integer, ArrayList<Course>> courseMap
                 = new LinkedHashMap<>();
