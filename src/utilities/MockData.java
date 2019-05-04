@@ -191,34 +191,121 @@ public class MockData {
     }
     
     private ArrayList<Course> getMockCourseList() {
-        ArrayList<Course> courseList = new ArrayList<>();
+        ArrayList<Course> courseList1 = new ArrayList<>();
+        ArrayList<Course> courseList2 = new ArrayList<>();
+        ArrayList<Course> courseList3 = new ArrayList<>();
+        ArrayList<Course> courseList4 = new ArrayList<>();
+        ArrayList<Course> courseList5 = new ArrayList<>();
+        ArrayList<Course> courseList6 = new ArrayList<>();
+        ArrayList<Course> courseList7 = new ArrayList<>();
+        ArrayList<Course> courseList8 = new ArrayList<>();
 
-        courseList.add(new Course("Natural Language Processing",
+        //semester 1
+        courseList1.add(new Course("Physics",
+                4, "PHY101", new Marks(44, 45, 40, 24), 77));
+        courseList1.add(new Course("Cultural Education",
+                4, "CUL101", new Marks(49, 49, 89, 29), 88));
+        courseList1.add(new Course("Vectors",
+                4, "MAT121", new Marks(49, 49, 89, 29), 88));
+        courseList1.add(new Course("CTPS",
+                4, "CSE121", new Marks(49, 49, 89, 29), 88));
+        courseList1.add(new Course("Mechanical Lab",
+                4, "MEC101", new Marks(49, 49, 89, 29), 88));
+
+        //semester2
+        courseList2.add(new Course("Introduction to C",
+                4, "CSE201", new Marks(44, 45, 40, 24), 77));
+        courseList2.add(new Course("Cultural Education",
+                4, "CUL201", new Marks(49, 49, 89, 29), 88));
+        courseList2.add(new Course("Differential Equations",
+                4, "MAT221", new Marks(49, 49, 89, 29), 88));
+        courseList2.add(new Course("Chemistry",
+                4, "CHE121", new Marks(49, 49, 89, 29), 88));
+        courseList2.add(new Course("Computer Essentials",
+                4, "CSE202", new Marks(49, 49, 89, 29), 88));
+
+        //semester3
+        courseList3.add(new Course("Object Oriented Programming",
+                4,"CSE202", new Marks(44, 45, 40, 24), 77));
+        courseList3.add(new Course("Introduction to DataStructures",
+                4, "CSE203", new Marks(49, 49, 89, 29), 88));
+        courseList3.add(new Course("Matrix",
+                4, "MAT302", new Marks(49, 49, 89, 29), 88));
+        courseList3.add(new Course("Business Education",
+                4, "ELE101", new Marks(49, 49, 89, 29), 88));
+        courseList3.add(new Course("Digital Circuits",
+                4, "ECE101", new Marks(49, 49, 89, 29), 88));
+
+        //semester4
+        courseList4.add(new Course("Operating Systems",
+                4, "CSE303", new Marks(44, 45, 40, 24), 77));
+        courseList4.add(new Course("Embedded Systems",
+                4, "ECE201", new Marks(49, 49, 89, 29), 88));
+        courseList4.add(new Course("Probability",
+                4, "MAT123", new Marks(49, 49, 89, 29), 88));
+        courseList4.add(new Course("French",
+                4, "ELE102", new Marks(49, 49, 89, 29), 88));
+        courseList4.add(new Course("Advance Datastructures",
+                4, "MEC101", new Marks(49, 49, 89, 29), 88));
+
+        //semester5
+        courseList5.add(new Course("Database Management System",
+                4, "CSE305", new Marks(44, 45, 40, 24), 77));
+        courseList5.add(new Course("AVP",
+                4, "CUL103", new Marks(49, 49, 89, 29), 88));
+        courseList5.add(new Course("COA",
+                4, "CSE204", new Marks(49, 49, 89, 29), 88));
+        courseList5.add(new Course("Computational Intelligence",
+                4, "CSE104", new Marks(49, 49, 89, 29), 88));
+        courseList5.add(new Course("TOC",
+                4, "CSE122", new Marks(49, 49, 89, 29), 88));
+ 
+        //semester6
+
+        courseList6.add(new Course("Natural Language Processing",
                 4, "CSE865", new Marks(49, 49, 89, 25), 80));
-        courseList.add(new Course("Pattern Recognition",
+        courseList6.add(new Course("Pattern Recognition",
                 4, "CSE853", new Marks(49, 50, 99, 29), 90));
-        courseList.add(new Course("Software Engineering",
+        courseList6.add(new Course("Software Engineering",
                 4, "CSE313", new Marks(50, 50, 100, 30), 75));
-        courseList.add(new Course("Compiler Design",
+        courseList6.add(new Course("Compiler Design",
                 4, "CSE311", new Marks(49, 49, 89, 28), 85));
-        courseList.add(new Course("Computer Networks",
+        courseList6.add(new Course("Computer Networks",
                 4, "CSE312", new Marks(49, 49, 89, 27), 77));
-        courseList.add(new Course("Softskills",
-                4, "SKL101", new Marks(49, 49, 89, 29), 88));
+        courseList6.add(new Course("Softskills",
+                4, "SKL101", new Marks(49, 49, 89, 29), 88));\
+
+
+        //semester 7
+        courseList7.add(new Course("PPC",
+                4, "CSE401", new Marks(44, 45, 40, 24), 77));
+        courseList7.add(new Course("Cryptography",
+                4, "CSE402", new Marks(49, 49, 89, 29), 88));
+        courseList7.add(new Course("Android",
+                4, "CSE403", new Marks(49, 49, 89, 29), 88));
+        courseList7.add(new Course("Machine Learning",
+                4, "CSE404", new Marks(49, 49, 89, 29), 88));
+
+
+        //semester8
+        courseList8.add(new Course("Final Year Project",
+                4,"CSE411", new Marks(44, 45, 40, 24), 77));
+        
+
         return courseList;
     }
 
     private LinkedHashMap<Integer, ArrayList<Course>> getCourseMap() {
         LinkedHashMap<Integer, ArrayList<Course>> courseMap
                 = new LinkedHashMap<>();
-        courseMap.put(1, getMockCourseList());
-        courseMap.put(2, getMockCourseList());
-        courseMap.put(3, getMockCourseList());
-        courseMap.put(4, getMockCourseList());
-        courseMap.put(5, getMockCourseList());
-        courseMap.put(6, getMockCourseList());
-        courseMap.put(7, getMockCourseList());
-        courseMap.put(8, getMockCourseList());
+        courseMap.put(1, getMockCourseList1());
+        courseMap.put(2, getMockCourseList2());
+        courseMap.put(3, getMockCourseList3());
+        courseMap.put(4, getMockCourseList4());
+        courseMap.put(5, getMockCourseList5());
+        courseMap.put(6, getMockCourseList6());
+        courseMap.put(7, getMockCourseList7());
+        courseMap.put(8, getMockCourseList8());
 
         return courseMap;
     }
