@@ -15,11 +15,13 @@
  */
 package pojo;
 
+import java.io.Serializable;
+
 /**
  * This class is a simple POJO for the Administrator
  * @author Abhilash G <abhilashg@am.students.amrita.edu>
  */
-public class Administrator {
+public class Administrator implements Serializable {
     
     private String username;
     private String password;

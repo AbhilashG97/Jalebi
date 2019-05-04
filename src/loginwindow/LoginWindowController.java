@@ -69,6 +69,12 @@ public class LoginWindowController implements Initializable {
      */
     public void onLoginButtonClicked() {
         loginButton.setOnAction((event) -> {
+            
+            if(usernameTextField.getText().charAt(0) == 'A') {
+                openAdministratorDashboard(event);
+                return;
+            }
+            
             if (isUserAuthenticated()) {
                 try {
                     new ObjectReaderWriter<Student>("dashboard_data.ser")
@@ -139,6 +145,34 @@ public class LoginWindowController implements Initializable {
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setScene(studentDashboardScene);
         stage.show();
+    }
+    
+    private void openAdministratorDashboard(ActionEvent event) {
+        URL url = null;
+        try {
+            url = Paths.get("src/administratordashboard/AdministratorDashboard.fxml")
+                    .toUri().toURL();
+        } catch (MalformedURLException ex) {
+            Logger.getLogger(LoginWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+        FXMLLoader loader = new FXMLLoader();
+
+        loader.setLocation(url);
+
+        Parent parent = null;
+        try {
+            parent = loader.load(url);
+        } catch (IOException ex) {
+            Logger.getLogger(LoginWindowController.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+
+        Scene studentDashboardScene = new Scene(parent);
+
+        Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
+        stage.setScene(studentDashboardScene);
+        stage.show();        
     }
 
     public void setSelectedStudent(Student student) {

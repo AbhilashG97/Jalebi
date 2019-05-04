@@ -30,7 +30,7 @@ public class Student implements Serializable {
     private String department;
     private LinkedHashMap<Integer, ArrayList<Course>> courseMap;
     private LinkedHashMap<Integer, Fine> fineMap;
-
+    
     public Student(String username,
                    String password,
                    String department,
@@ -43,6 +43,13 @@ public class Student implements Serializable {
         this.fineMap = fineMap;
     }
 
+    public Student(String username, String password, String department, LinkedHashMap<Integer, Fine> fineMap) {
+        this.username = username;
+        this.password = password;
+        this.department = department;
+        this.fineMap = fineMap;
+    }
+ 
     public LinkedHashMap<Integer, ArrayList<Course>> getCourseMap() {
         return courseMap;
     }

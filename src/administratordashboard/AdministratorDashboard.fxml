@@ -4,65 +4,88 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Menu?>
+<?import javafx.scene.control.MenuBar?>
+<?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.PasswordField?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/11.0.1" fx:controller="administratordashboard.AdministratorDashboardController">
-   <children>
-      <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" text="Administrator Window">
-         <font>
-            <Font name="System Bold" size="16.0" />
-         </font>
-      </Label>
-      <GridPane alignment="TOP_CENTER" layoutX="30.0" layoutY="78.0" prefHeight="245.0" prefWidth="541.0">
-        <columnConstraints>
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
+<BorderPane maxHeight="400.0" maxWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="administratordashboard.AdministratorDashboardController">
+   <center>
+      <AnchorPane id="AnchorPane" maxHeight="375.0" prefHeight="375.0" prefWidth="600.0">
          <children>
-            <Label contentDisplay="CENTER" prefHeight="37.0" prefWidth="224.0" text="Username">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
+            <Label alignment="CENTER" layoutX="14.0" layoutY="14.0" text="Administrator Window">
                <font>
-                  <Font name="System Bold" size="13.0" />
+                  <Font name="System Bold" size="16.0" />
                </font>
             </Label>
-            <Label contentDisplay="CENTER" layoutX="34.0" layoutY="22.0" prefHeight="37.0" prefWidth="224.0" text="Password" GridPane.rowIndex="1">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <Label contentDisplay="CENTER" layoutX="34.0" layoutY="22.0" prefHeight="37.0" prefWidth="224.0" text="Department" GridPane.rowIndex="2">
-               <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
-               </padding>
-               <font>
-                  <Font name="System Bold" size="13.0" />
-               </font>
-            </Label>
-            <TextField fx:id="fineTextField" focusTraversable="false" maxWidth="200.0" prefWidth="200.0" promptText="Enter fine" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-            <ComboBox fx:id="selectSemesterComboBox" prefHeight="25.0" prefWidth="205.0" promptText="Select Semester" GridPane.rowIndex="3" />
-            <TextField fx:id="usenameTextField" focusTraversable="false" layoutX="316.0" layoutY="212.0" maxWidth="200.0" prefWidth="200.0" promptText="Enter Username" GridPane.columnIndex="1" />
-            <TextField fx:id="departmentTextField" focusTraversable="false" layoutX="316.0" layoutY="212.0" maxWidth="200.0" prefWidth="200.0" promptText="Enter Department" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-            <PasswordField fx:id="passwordField" focusTraversable="false" maxWidth="200.0" promptText="Enter Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <GridPane alignment="TOP_CENTER" layoutX="30.0" layoutY="78.0" prefHeight="245.0" prefWidth="541.0">
+              <columnConstraints>
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                <ColumnConstraints halignment="CENTER" hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+              </columnConstraints>
+              <rowConstraints>
+                <RowConstraints minHeight="10.0" prefHeight="30.0" valignment="CENTER" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+              </rowConstraints>
+               <children>
+                  <Label contentDisplay="CENTER" prefHeight="37.0" prefWidth="224.0" text="Username">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" layoutX="34.0" layoutY="22.0" prefHeight="37.0" prefWidth="224.0" text="Password" GridPane.rowIndex="1">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <Label contentDisplay="CENTER" layoutX="34.0" layoutY="22.0" prefHeight="37.0" prefWidth="224.0" text="Department" GridPane.rowIndex="2">
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <font>
+                        <Font name="System Bold" size="13.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="fineTextField" focusTraversable="false" maxWidth="200.0" prefWidth="200.0" promptText="Enter fine" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                  <ComboBox fx:id="selectSemesterComboBox" focusTraversable="false" prefHeight="25.0" prefWidth="205.0" promptText="Select Semester" GridPane.rowIndex="3" />
+                  <TextField fx:id="usenameTextField" focusTraversable="false" layoutX="316.0" layoutY="212.0" maxWidth="200.0" prefWidth="200.0" promptText="Enter Username" GridPane.columnIndex="1" />
+                  <TextField fx:id="departmentTextField" focusTraversable="false" layoutX="316.0" layoutY="212.0" maxWidth="200.0" prefWidth="200.0" promptText="Enter Department" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                  <PasswordField fx:id="passwordField" focusTraversable="false" maxWidth="200.0" promptText="Enter Password" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+               </children>
+            </GridPane>
+            <Button fx:id="createStudentButton" focusTraversable="false" layoutX="439.0" layoutY="330.0" mnemonicParsing="false" text="Create Student" />
          </children>
-      </GridPane>
-      <Button fx:id="createStudentButton" focusTraversable="false" layoutX="441.0" layoutY="361.0" mnemonicParsing="false" text="Create Student" />
-   </children>
-</AnchorPane>
+      </AnchorPane>
+   </center>
+   <top>
+      <MenuBar fx:id="menuBar" maxHeight="25.0" BorderPane.alignment="CENTER">
+        <menus>
+          <Menu mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="logoutMenuItem" mnemonicParsing="false" onAction="#logout" text="Log out" />
+            </items>
+          </Menu>
+          <Menu mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="aboutMenuItem" mnemonicParsing="false" onAction="#about" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+   </top>
+</BorderPane>

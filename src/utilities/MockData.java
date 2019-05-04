@@ -26,6 +26,7 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import pojo.Administrator;
 import pojo.Course;
 import pojo.Faculty;
 import pojo.Fine;
@@ -165,6 +166,29 @@ public class MockData {
         }
         return data;
     }    
+    
+    public void writeAdministratorListToFile() {
+        try {
+            new ObjectReaderWriter<ArrayList<Administrator>>("admin_database.ser")
+                    .writeObjectToFile(getAdministratorList());
+        } catch (IOException ex) {
+            Logger.getLogger(MockData.class.getName())
+                    .log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ArrayList<Administrator> readAdministratorListFromFile() {
+        return new ObjectReaderWriter<ArrayList<Administrator>>("admin_database.ser")
+                .readObjectFromFile();
+    }
+    
+    public ArrayList<Administrator> getAdministratorList() {
+        
+        ArrayList<Administrator> administratorList = new ArrayList<>();
+        administratorList.add(new Administrator("Araghu", "maut"));
+        administratorList.add(new Administrator("Asid", "happy"));        
+        return administratorList;
+    }
     
     private ArrayList<Course> getMockCourseList() {
         ArrayList<Course> courseList = new ArrayList<>();
